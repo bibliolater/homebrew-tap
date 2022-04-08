@@ -5,21 +5,21 @@
 class Bookhunter < Formula
   desc "Software to download chinese ebooks from Internet."
   homepage "https://github.com/bibliolater"
-  version "0.1.0"
+  version "0.2.0"
   license "MIT"
 
   on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.1.0/bookhunter_0.1.0_darwin_arm64.tar.gz"
-      sha256 "b230f733ce56805500bb25e7ffffaed6c0ab0fee7df2230621480c0e345454cb"
+    if Hardware::CPU.intel?
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.2.0/bookhunter_0.2.0_darwin_amd64.tar.gz"
+      sha256 "27776ff35fb501c47d0809e0029f3f184a188a0b289ab34de6bfc05858ecefaf"
 
       def install
         bin.install "bookhunter"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.1.0/bookhunter_0.1.0_darwin_amd64.tar.gz"
-      sha256 "0664b84cacf9ce54f26191f72393cd95323d8bbc38587fca0fc8510bf6b373d5"
+    if Hardware::CPU.arm?
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.2.0/bookhunter_0.2.0_darwin_arm64.tar.gz"
+      sha256 "33201c8bb18284f54945e485c581747ff21f01469ea85384d31cbb91b6664f9e"
 
       def install
         bin.install "bookhunter"
@@ -29,16 +29,16 @@ class Bookhunter < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.1.0/bookhunter_0.1.0_linux_arm64.tar.gz"
-      sha256 "c6379fda48e99b65ec331539912f5dbf42f1f65e7be2c24e405c7a509410a4e0"
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.2.0/bookhunter_0.2.0_linux_arm64.tar.gz"
+      sha256 "1d83ec3b1c37cc4c9dbaebd0e67c28cc4c87d6d4d21ef9e5fee420de8475f4f3"
 
       def install
         bin.install "bookhunter"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.1.0/bookhunter_0.1.0_linux_amd64.tar.gz"
-      sha256 "c9130b64e9d9183cb98c2a1bf545b77d98593117101a27124fdbe628ed142e17"
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.2.0/bookhunter_0.2.0_linux_amd64.tar.gz"
+      sha256 "9d5f2e3eebc3158d2bf2a44deb92fe911b9de4c248977a15ee349a44c6e7f6c6"
 
       def install
         bin.install "bookhunter"
@@ -47,15 +47,18 @@ class Bookhunter < Formula
   end
 
   def post_install
-    # Install completions
-    (prefix/"completions").mkdir
+    # Install shell completions
+    output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
+    (bash_completion/"goreleaser").write output
 
-    system "#{bin}/bookhunter completion zsh > #{prefix}/completions/_bookhunter"
-    system "#{bin}/bookhunter completion bash > #{prefix}/completions/bookhunter.bash"
+    output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
+    (zsh_completion/"_goreleaser").write output
 
-    zsh_completion.install "#{prefix}/completions/_bookhunter"
-    bash_completion.install "#{prefix}/completions/bookhunter.bash"
+    output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
+    (fish_completion/"goreleaser.fish").write output
+  end
 
-    rmdir prefix/"completions"
+  test do
+    system "#{bin}/bookhunter -v"
   end
 end
