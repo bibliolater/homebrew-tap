@@ -5,57 +5,85 @@
 class Bookhunter < Formula
   desc "Software to download chinese ebooks from Internet."
   homepage "https://github.com/bibliolater"
-  version "0.4.0"
+  version "0.4.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.0/bookhunter_0.4.0_darwin_arm64.tar.gz"
-      sha256 "603c09e3205b7c1968feae9b61cdf44c807a2746efe4ea668a3b4e7b097a5054"
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.1/bookhunter_0.4.1_darwin_arm64.tar.gz"
+      sha256 "93a16ed698f35e9ea07235b0411e9ffe0f884b1b8db21ab1650e5b4bcafcc344"
 
       def install
         bin.install "bookhunter"
+
+        # Install shell completions
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
+        (bash_completion/"goreleaser").write output
+
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
+        (zsh_completion/"_goreleaser").write output
+
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
+        (fish_completion/"goreleaser.fish").write output
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.0/bookhunter_0.4.0_darwin_amd64.tar.gz"
-      sha256 "cae3a28155880a7e2dbea2c068ec2771cf732da337b6aa87197cbb6be7f81666"
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.1/bookhunter_0.4.1_darwin_amd64.tar.gz"
+      sha256 "b92901bc82c4ea547a0383d9d4254d6ca609a568e33329af6fbeda4c5905749f"
 
       def install
         bin.install "bookhunter"
+
+        # Install shell completions
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
+        (bash_completion/"goreleaser").write output
+
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
+        (zsh_completion/"_goreleaser").write output
+
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
+        (fish_completion/"goreleaser.fish").write output
       end
     end
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.0/bookhunter_0.4.0_linux_amd64.tar.gz"
-      sha256 "5d3e03010b8ef483209aab6cfc37d6c3c4f77faa4d9b53bfeb7e2faf1086be8b"
-
-      def install
-        bin.install "bookhunter"
-      end
-    end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.0/bookhunter_0.4.0_linux_arm64.tar.gz"
-      sha256 "7915406793d647efdb54fc585d6e8864b4b4f9422a4b8a20677e1a88a076ccdd"
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.1/bookhunter_0.4.1_linux_arm64.tar.gz"
+      sha256 "cef4a5a5e6c08649f737ffdb950a68e95a0849398a4842bd4412bab621b2c6f1"
 
       def install
         bin.install "bookhunter"
+
+        # Install shell completions
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
+        (bash_completion/"goreleaser").write output
+
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
+        (zsh_completion/"_goreleaser").write output
+
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
+        (fish_completion/"goreleaser.fish").write output
       end
     end
-  end
+    if Hardware::CPU.intel?
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.1/bookhunter_0.4.1_linux_amd64.tar.gz"
+      sha256 "ac20f677f8731723b21327eb92a52aa16f140b7e7de9ae704a6a8fcc14408b54"
 
-  def post_install
-    # Install shell completions
-    output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
-    (bash_completion/"goreleaser").write output
+      def install
+        bin.install "bookhunter"
 
-    output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
-    (zsh_completion/"_goreleaser").write output
+        # Install shell completions
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
+        (bash_completion/"goreleaser").write output
 
-    output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
-    (fish_completion/"goreleaser.fish").write output
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
+        (zsh_completion/"_goreleaser").write output
+
+        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
+        (fish_completion/"goreleaser.fish").write output
+      end
+    end
   end
 
   test do
