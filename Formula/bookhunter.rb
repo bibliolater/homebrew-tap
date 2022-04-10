@@ -5,13 +5,13 @@
 class Bookhunter < Formula
   desc "Software to download chinese ebooks from Internet."
   homepage "https://github.com/bibliolater"
-  version "0.4.3"
+  version "0.4.4"
   license "MIT"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.3/bookhunter_0.4.3_darwin_amd64.tar.gz"
-      sha256 "b136574150d8ffc6c25f327535cca343dcb4980d6a6ad95a68f145ed95dc0eaf"
+    if Hardware::CPU.arm?
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.4/bookhunter_0.4.4_darwin_arm64.tar.gz"
+      sha256 "539ca718a58b0cecb9ee065bdac894aec74adb8c6b866a2dfc5a79d47230c068"
 
       def install
         bin.install "bookhunter"
@@ -27,9 +27,9 @@ class Bookhunter < Formula
         (fish_completion/"bookhunter.fish").write output
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.3/bookhunter_0.4.3_darwin_arm64.tar.gz"
-      sha256 "283901ee02b4ab33ae8064a0719505b1d73395c0b1a4d3d302036e38a54df088"
+    if Hardware::CPU.intel?
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.4/bookhunter_0.4.4_darwin_amd64.tar.gz"
+      sha256 "1c51541a174e5fda380010d29f316c06e2a6a31a221079d8795804bf6136b00c"
 
       def install
         bin.install "bookhunter"
@@ -49,8 +49,8 @@ class Bookhunter < Formula
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.3/bookhunter_0.4.3_linux_amd64.tar.gz"
-      sha256 "55b76f39762e68c4e59ff6fe6ba30493e0087a77e4aed239cd8595e90cb31f4d"
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.4/bookhunter_0.4.4_linux_amd64.tar.gz"
+      sha256 "7f6a8cebdf3ab4d86072018c993f12a9fe95519ad5681f1cef045ae66abac8a9"
 
       def install
         bin.install "bookhunter"
@@ -67,8 +67,8 @@ class Bookhunter < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.3/bookhunter_0.4.3_linux_arm64.tar.gz"
-      sha256 "9f9beea810db278ec960729517e82b3432329b966ba1f7035f82082a3b26d5f3"
+      url "https://github.com/bibliolater/bookhunter/releases/download/v0.4.4/bookhunter_0.4.4_linux_arm64.tar.gz"
+      sha256 "7673fa05a02881df062b5106e5ceaf06c8d4816211634e4549608be957cef78b"
 
       def install
         bin.install "bookhunter"
@@ -87,6 +87,6 @@ class Bookhunter < Formula
   end
 
   test do
-    system "#{bin}/bookhunter -v"
+    system "#{bin}/bookhunter version"
   end
 end
