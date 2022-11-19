@@ -5,13 +5,13 @@
 class Bookhunter < Formula
   desc "Software to download chinese ebooks from Internet."
   homepage "https://github.com/bookstairs"
-  version "0.9.0"
+  version "0.9.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.9.0/bookhunter_0.9.0_darwin_arm64.tar.gz"
-      sha256 "9ec4b17f78e8e832c864f0bedcafd1d67d18cd3ae147e09bf5d8ab2672511e62"
+      url "https://github.com/bookstairs/bookhunter/releases/download/v0.9.1/bookhunter_0.9.1_darwin_arm64.tar.gz"
+      sha256 "037923664b48071b8b80056492976ffefa62b0498de435e2b67d97688ebfe8f5"
 
       def install
         bin.install "bookhunter"
@@ -28,8 +28,8 @@ class Bookhunter < Formula
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.9.0/bookhunter_0.9.0_darwin_amd64.tar.gz"
-      sha256 "9282014d8dd7920839adee0459b9855503ed6691f827b963667feebf1abe86b9"
+      url "https://github.com/bookstairs/bookhunter/releases/download/v0.9.1/bookhunter_0.9.1_darwin_amd64.tar.gz"
+      sha256 "40b4763d747e276c047548f5f351f89b66f90a218f16ba14d13dbd0338481264"
 
       def install
         bin.install "bookhunter"
@@ -48,9 +48,9 @@ class Bookhunter < Formula
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.9.0/bookhunter_0.9.0_linux_amd64.tar.gz"
-      sha256 "ec0ebd0fcfa3b11a4d8a4e93f1a8398acbb4ba297e5ae8d0b54e080b25e8fb0f"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/bookstairs/bookhunter/releases/download/v0.9.1/bookhunter_0.9.1_linux_arm64.tar.gz"
+      sha256 "1fe2721f6daa5bcef60e8f917fe41a218c40d524049d8d2132a3a9a6105a6dcd"
 
       def install
         bin.install "bookhunter"
@@ -66,9 +66,9 @@ class Bookhunter < Formula
         (fish_completion/"bookhunter.fish").write output
       end
     end
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.9.0/bookhunter_0.9.0_linux_arm64.tar.gz"
-      sha256 "b947828228b40024358a60fffc33bc319104eaaba39767ce99b5be4cbcf3e9b9"
+    if Hardware::CPU.intel?
+      url "https://github.com/bookstairs/bookhunter/releases/download/v0.9.1/bookhunter_0.9.1_linux_amd64.tar.gz"
+      sha256 "0861069d7bda16ea246c53fb9b2ad69481244b7356700897774e6622da00bb2d"
 
       def install
         bin.install "bookhunter"
