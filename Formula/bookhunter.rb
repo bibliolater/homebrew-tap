@@ -9,9 +9,9 @@ class Bookhunter < Formula
   license "MIT"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.11.0/bookhunter_0.11.0_darwin_amd64.tar.gz"
-      sha256 "772dce2dbd0976b2acf7e21bfad39a03a8b0317fc4a47b9720337e9fb0242872"
+    if Hardware::CPU.arm?
+      url "https://github.com/bookstairs/bookhunter/releases/download/v0.11.0/bookhunter_0.11.0_darwin_arm64.tar.gz"
+      sha256 "7088dbe5eaae2014b27af268dedf105587a2703126534b2e2d076db525406a23"
 
       def install
         bin.install "bookhunter"
@@ -27,9 +27,9 @@ class Bookhunter < Formula
         (fish_completion/"bookhunter.fish").write output
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.11.0/bookhunter_0.11.0_darwin_arm64.tar.gz"
-      sha256 "8e69f24ddf480afc1a4e46c274846e5bdcbd19877cf5023193bd867c2b5034d2"
+    if Hardware::CPU.intel?
+      url "https://github.com/bookstairs/bookhunter/releases/download/v0.11.0/bookhunter_0.11.0_darwin_amd64.tar.gz"
+      sha256 "30b8e9538dcf253db48b5c9023c9fef46e02f4221659d905abaa4f4cdf915eea"
 
       def install
         bin.install "bookhunter"
@@ -50,7 +50,7 @@ class Bookhunter < Formula
   on_linux do
     if Hardware::CPU.intel?
       url "https://github.com/bookstairs/bookhunter/releases/download/v0.11.0/bookhunter_0.11.0_linux_amd64.tar.gz"
-      sha256 "68045fee4383a87e1a392ada80348384a2629746021609958a210d967c37defc"
+      sha256 "69ea48a1d30d557862db5261d86b6ffed8dc0033ce9e06dabb7d9bc4b1053642"
 
       def install
         bin.install "bookhunter"
@@ -68,7 +68,7 @@ class Bookhunter < Formula
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/bookstairs/bookhunter/releases/download/v0.11.0/bookhunter_0.11.0_linux_arm64.tar.gz"
-      sha256 "5211f544b3617158d34438aeb975389e106c3ec0f7e4ece9e134436f5e6350d9"
+      sha256 "f12b2a14ff9c2e4b1b070e53984563dd8fdb93fdbe7161e9d85354d685cf8f66"
 
       def install
         bin.install "bookhunter"
