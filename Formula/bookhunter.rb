@@ -5,13 +5,13 @@
 class Bookhunter < Formula
   desc "Software to download chinese ebooks from Internet."
   homepage "https://github.com/bookstairs"
-  version "0.14.3"
+  version "0.14.4"
   license "MIT"
 
   on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.14.3/bookhunter_0.14.3_darwin_arm64.tar.gz"
-      sha256 "6c4ff82754ca3fe444cc132f085f125f23ce09f87296afd5641f1953e4fd447d"
+    on_intel do
+      url "https://github.com/bookstairs/bookhunter/releases/download/v0.14.4/bookhunter_0.14.4_darwin_amd64.tar.gz"
+      sha256 "b82e269b588deb97b91a5c0db9ce019f57c43a9229c4f37aea034a52bc6c0d6e"
 
       def install
         bin.install "bookhunter"
@@ -27,9 +27,9 @@ class Bookhunter < Formula
         (fish_completion/"bookhunter.fish").write output
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.14.3/bookhunter_0.14.3_darwin_amd64.tar.gz"
-      sha256 "4b8218c6031a9ca74e582bae84b077f630842c66b086dc01a76bad0268a74d50"
+    on_arm do
+      url "https://github.com/bookstairs/bookhunter/releases/download/v0.14.4/bookhunter_0.14.4_darwin_arm64.tar.gz"
+      sha256 "08a49e010b655fc1c8498bf649b38d4cafaeb9c8f38c6b55a186fef00edfa732"
 
       def install
         bin.install "bookhunter"
@@ -48,40 +48,44 @@ class Bookhunter < Formula
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.14.3/bookhunter_0.14.3_linux_amd64.tar.gz"
-      sha256 "3c4074b4b4b83c5ec4429c04609a0b957b1542683977a2cf9cd84aff6c596a05"
+    on_intel do
+      if Hardware::CPU.is_64_bit?
+        url "https://github.com/bookstairs/bookhunter/releases/download/v0.14.4/bookhunter_0.14.4_linux_amd64.tar.gz"
+        sha256 "5c1ad79949270ae13cbc6092f42c8d3f3635b590802e56d50e3eeab6a4ab6473"
 
-      def install
-        bin.install "bookhunter"
+        def install
+          bin.install "bookhunter"
 
-        # Install shell completions
-        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
-        (bash_completion/"bookhunter").write output
+          # Install shell completions
+          output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
+          (bash_completion/"bookhunter").write output
 
-        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
-        (zsh_completion/"_bookhunter").write output
+          output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
+          (zsh_completion/"_bookhunter").write output
 
-        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
-        (fish_completion/"bookhunter.fish").write output
+          output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
+          (fish_completion/"bookhunter.fish").write output
+        end
       end
     end
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/bookstairs/bookhunter/releases/download/v0.14.3/bookhunter_0.14.3_linux_arm64.tar.gz"
-      sha256 "e12c66a776aa3d69d5bdde6c1a4c1c8e568fed9120a5bb57bf3bfafc92c7d095"
+    on_arm do
+      if Hardware::CPU.is_64_bit?
+        url "https://github.com/bookstairs/bookhunter/releases/download/v0.14.4/bookhunter_0.14.4_linux_arm64.tar.gz"
+        sha256 "0dbe6884cdbf45ae54d3d0d1e893c29b1022483a40b2e8a855c350afd594d1ad"
 
-      def install
-        bin.install "bookhunter"
+        def install
+          bin.install "bookhunter"
 
-        # Install shell completions
-        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
-        (bash_completion/"bookhunter").write output
+          # Install shell completions
+          output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "bash")
+          (bash_completion/"bookhunter").write output
 
-        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
-        (zsh_completion/"_bookhunter").write output
+          output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "zsh")
+          (zsh_completion/"_bookhunter").write output
 
-        output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
-        (fish_completion/"bookhunter.fish").write output
+          output = Utils.safe_popen_read("#{bin}/bookhunter", "completion", "fish")
+          (fish_completion/"bookhunter.fish").write output
+        end
       end
     end
   end
